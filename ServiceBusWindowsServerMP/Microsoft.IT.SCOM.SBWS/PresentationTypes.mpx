@@ -1,0 +1,141 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PresentationTypes>
+    <UIPages>
+      <UIPage ID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.InputParser" Accessibility="Internal">
+        <Implementation>
+          <Assembly>Microsoft.IT.SCOM.SBWS.UI</Assembly>
+          <Type>Microsoft.IT.SCOM.SBWS.UI.InputParser</Type>
+        </Implementation>
+      </UIPage>
+      <UIPage ID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.SBWSNamespaceDetails" Accessibility="Public">
+        <Implementation>
+          <Assembly>Microsoft.IT.SCOM.SBWS.UI</Assembly>
+          <Type>Microsoft.IT.SCOM.SBWS.UI.SBWSNamespaceDetails</Type>
+        </Implementation>
+      </UIPage>
+      <UIPage ID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.Summary" Accessibility="Public">
+        <Implementation>
+          <Assembly>Microsoft.IT.SCOM.SBWS.UI</Assembly>
+          <Type>Microsoft.IT.SCOM.SBWS.UI.Summary</Type>
+        </Implementation>
+      </UIPage>
+    </UIPages>
+    <UIPageSets>
+      <UIPageSet ID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery" TypeDefinitionID="Microsoft.IT.SCOM.SBWS.Template.SBWSNamespaceDiscovery">
+        <UIPageReferences>
+          <UIPageReference ID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.NameAndDescription" PageID="System!System.NameAndDescriptionPage" Usage="CreationAndUpdate">
+            <InputTransform>
+              <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+                <xsl:template match="/">
+                  <xsl:element name="Name">
+                    <xsl:value-of select="//Name" />
+                  </xsl:element>
+                  <xsl:element name="Description">
+                    <xsl:value-of select="//Description" />
+                  </xsl:element>
+                </xsl:template>
+              </xsl:stylesheet>
+            </InputTransform>
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+          <UIPageReference ID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.SBWSNamespaceDetails" PageID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.SBWSNamespaceDetails" Usage="CreationAndUpdate">
+            <InputTransform>
+              <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+                <xsl:template match="/">
+                  <xsl:element name="SBWSNamespaceName">
+                    <xsl:value-of select="//SBWSNamespaceName" />
+                  </xsl:element>
+                  <xsl:element name="SBWSHostName">
+                    <xsl:value-of select="//SBWSHostName" />
+                  </xsl:element>
+                  <xsl:element name="RunAsAccount">
+                    <xsl:value-of select="//RunAsAccount" />
+                  </xsl:element>
+                  <xsl:element name="TemplateIdString">
+                    <xsl:value-of select="//TemplateIdString" />
+                </xsl:element>
+                </xsl:template>
+              </xsl:stylesheet>
+            </InputTransform>
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>          
+          <UIPageReference ID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.Summary" PageID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.Summary" Usage="CreationOnly">
+            <Title ID="Title" />
+            <SubTitle ID="SubTitle" />
+            <TabName ID="TabName" />
+          </UIPageReference>
+        </UIPageReferences>
+        <OutputTransform>
+          <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            <xsl:output method="xml" indent="yes" omit-xml-declaration="yes" />
+            <xsl:template match="/">
+              <xsl:element name="Configuration">
+                <xsl:element name="Name">
+                  <xsl:value-of select="//Name" />
+                </xsl:element>
+                <xsl:element name="Description">
+                  <xsl:value-of select="//Description" />
+                </xsl:element>
+                <xsl:element name="SBWSNamespaceName">
+                  <xsl:value-of select="//SBWSNamespaceName" />
+                </xsl:element>
+                <xsl:element name="SBWSHostName">
+                  <xsl:value-of select="//SBWSHostName" />
+                </xsl:element>
+                <xsl:element name="RunAsAccount">
+                  <xsl:value-of select="//RunAsAccount" />
+                </xsl:element>
+                <xsl:element name="TemplateIdString">
+                  <xsl:value-of select="//TemplateIdString" />
+                </xsl:element>
+              </xsl:element>
+            </xsl:template>
+          </xsl:stylesheet>
+        </OutputTransform>
+      </UIPageSet>
+    </UIPageSets>
+  </PresentationTypes>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.Template.SBWSNamespaceDiscovery">
+          <Name>Microsoft IT Service Bus for Windows Server</Name>
+          <Description>This template allows you to monitor entities in Service Bus for Windows Server.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.NameAndDescription" SubElementID="SubTitle">
+          <Name>Name and Description</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.NameAndDescription" SubElementID="TabName">
+          <Name>General</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.NameAndDescription" SubElementID="Title">
+          <Name>General Properties</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.SBWSNamespaceDetails" SubElementID="SubTitle">
+          <Name>Service Bus for Windows Server Namespace Details</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.SBWSNamespaceDetails" SubElementID="TabName">
+          <Name>Service Bus for Windows Server Namespace Details</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.SBWSNamespaceDetails" SubElementID="Title">
+          <Name>Service Bus for Windows Server Namespace Details</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.Summary" SubElementID="SubTitle">
+          <Name>Summary</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.Summary" SubElementID="TabName">
+          <Name>Summary</Name>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.TemplatePageSet.SBWSNamespaceDiscovery.Summary" SubElementID="Title">
+          <Name>Summary</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

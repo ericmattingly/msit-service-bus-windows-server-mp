@@ -1,0 +1,106 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Presentation>
+    <Views>
+      <View ID="Microsoft.IT.SCOM.SBWS.View.Alerts" Accessibility="Public" Enabled="true" Target="Microsoft.IT.SCOM.SBWS.NamespaceGroup" TypeID="SC!Microsoft.SystemCenter.AlertViewType" Visible="true">
+        <Category>Operations</Category>
+        <Criteria>
+          <ResolutionState>
+            <StateRange Operator="LessThan">255</StateRange>
+          </ResolutionState>
+        </Criteria>
+      </View>
+      <View ID="Microsoft.IT.SCOM.SBWS.Namespace.View.State" Accessibility="Public" Enabled="true" Target="Microsoft.IT.SCOM.SBWS.Namespace" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>StateCollection</Category>
+        <Criteria />
+        <Presentation>
+          <ColumnInfo Index="0" SortIndex="0" Width="100" Grouped="false" Sorted="true" IsSortable="true" Visible="true" SortOrder="Descending">
+            <Name>State</Name>
+            <Id>Microsoft.IT.SCOM.SBWS.Namespace</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="1" SortIndex="-1" Width="22" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Maintenance Mode</Name>
+            <Id>InMaintenanceMode</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="2" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Name</Name>
+            <Id>Name</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="5" SortIndex="-1" Width="190" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Namespace Name</Name>
+            <Id>Microsoft.IT.SCOM.SBWS.Namespace/NamespaceName</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="8" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Queues</Name>
+            <Id>Microsoft.IT.SCOM.SBWS.Queue</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="9" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Topics</Name>
+            <Id>Microsoft.IT.SCOM.SBWS.Topic</Id>
+          </ColumnInfo>
+          <ColumnInfo Index="10" SortIndex="-1" Width="100" Grouped="false" Sorted="false" IsSortable="true" Visible="true" SortOrder="Ascending">
+            <Name>Subscriptions</Name>
+            <Id>Microsoft.IT.SCOM.SBWS.Subscription</Id>
+          </ColumnInfo>
+        </Presentation>
+      </View>
+      <View ID="Microsoft.IT.SCOM.SBWS.Queue.View.State" Accessibility="Public" Enabled="true" Target="Microsoft.IT.SCOM.SBWS.Queue" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>StateCollection</Category>
+        <Criteria />
+      </View>
+      <View ID="Microsoft.IT.SCOM.SBWS.Topic.View.State" Accessibility="Public" Enabled="true" Target="Microsoft.IT.SCOM.SBWS.Topic" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>StateCollection</Category>
+        <Criteria />
+      </View>
+
+      <View ID="Microsoft.IT.SCOM.SBWS.Subscription.View.State" Accessibility="Public" Enabled="true" Target="Microsoft.IT.SCOM.SBWS.Subscription" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>StateCollection</Category>
+        <Criteria />
+      </View>
+
+    </Views>
+    <Folders>
+      <Folder ID="Microsoft.IT.SCOM.SBWS.Folder.Root" Accessibility="Public" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+      <Folder ID="Microsoft.IT.SCOM.SBWS.Folder.Template.SBWSNamespaceDiscovery" Accessibility="Public" ParentFolder="OM!Microsoft.SystemCenter.OperationsManager.Authoring.TemplateParsers.Root" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.View.Alerts" ElementID="Microsoft.IT.SCOM.SBWS.View.Alerts" Folder="Microsoft.IT.SCOM.SBWS.Folder.Root" />
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.Namespace.View.State" ElementID="Microsoft.IT.SCOM.SBWS.Namespace.View.State" Folder="Microsoft.IT.SCOM.SBWS.Folder.Root" />
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.Queue.View.State" ElementID="Microsoft.IT.SCOM.SBWS.Queue.View.State" Folder="Microsoft.IT.SCOM.SBWS.Folder.Root" />
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.Topic.View.State" ElementID="Microsoft.IT.SCOM.SBWS.Topic.View.State" Folder="Microsoft.IT.SCOM.SBWS.Folder.Root" />
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.Subscription.View.State" ElementID="Microsoft.IT.SCOM.SBWS.Subscription.View.State" Folder="Microsoft.IT.SCOM.SBWS.Folder.Root" />
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.Template.SBWSNamespaceDiscovery" ElementID="Microsoft.IT.SCOM.SBWS.Template.SBWSNamespaceDiscovery" Folder="Microsoft.IT.SCOM.SBWS.Folder.Template.SBWSNamespaceDiscovery" />
+      <FolderItem ID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.InputParser" ElementID="Microsoft.IT.SCOM.SBWS.TemplatePage.SBWSNamespaceDiscovery.InputParser" Folder="Microsoft.IT.SCOM.SBWS.Folder.Template.SBWSNamespaceDiscovery" />
+    </FolderItems>
+  </Presentation>
+
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.Folder.Root">
+          <Name>Microsoft IT Service Bus for Windows Server</Name>
+          <Description>Service Bus for Windows Server Folder</Description>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.View.Alerts">
+          <Name>Alerts</Name>
+          <Description>This view shows the alerts for all Service Bus for Windows Server Namespaces</Description>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.Namespace.View.State">
+          <Name>Namespaces</Name>
+          <Description>This view shows the state for all Service Bus for Windows Server Namespaces</Description>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.Queue.View.State">
+          <Name>Queues</Name>
+          <Description>This view shows the state for all Service Bus for Windows Server Queue</Description>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.Topic.View.State">
+          <Name>Topics</Name>
+          <Description>This view shows the state for all Service Bus for Windows Server Topic</Description>
+        </DisplayString>
+        <DisplayString ElementID="Microsoft.IT.SCOM.SBWS.Subscription.View.State">
+          <Name>Subscriptions</Name>
+          <Description>This view shows the state for all Service Bus for Windows Server Subscriptions</Description>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

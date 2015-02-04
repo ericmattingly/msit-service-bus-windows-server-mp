@@ -1,0 +1,185 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Templates>
+    <Template ID="Microsoft.IT.SCOM.SBWS.Template.SBWSNamespaceDiscovery">
+      <Configuration>
+        <xsd:element name="Name" type="xsd:string" />
+        <xsd:element name="Description" type="xsd:string" />
+        <xsd:element name="SBWSNamespaceName" type="xsd:string" />
+        <xsd:element name="SBWSHostName" type="xsd:string" />
+        <xsd:element name="RunAsAccount" type="xsd:string" />        
+        <xsd:element name="TemplateIdString" type="xsd:string" />
+      </Configuration>
+      <References>
+        <Reference ID="Self" />
+        <Reference ID="System" />
+        <Reference ID="Performance" />
+        <Reference ID="SC" />
+        <Reference ID="SCDW" />
+        <Reference ID="Health" />
+        <Reference ID="Windows" />
+      </References>
+      <Implementation>
+        <TypeDefinitions>
+          <EntityTypes>
+            <ClassTypes>
+              <ClassType ID="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$" Accessibility="Internal" Abstract="false" Base="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace" Hosted="false" Singleton="false" />
+              <ClassType ID="Microsoft.IT.SCOM.SBWS.Queue.$TemplateConfig/TemplateIdString$" Accessibility="Internal" Abstract="false" Base="$Reference/Self$Microsoft.IT.SCOM.SBWS.Queue" Hosted="true" Singleton="false" />
+              <ClassType ID="Microsoft.IT.SCOM.SBWS.Topic.$TemplateConfig/TemplateIdString$" Accessibility="Internal" Abstract="false" Base="$Reference/Self$Microsoft.IT.SCOM.SBWS.Topic" Hosted="true" Singleton="false" />
+              <ClassType ID="Microsoft.IT.SCOM.SBWS.Subscription.$TemplateConfig/TemplateIdString$" Accessibility="Internal" Abstract="false" Base="$Reference/Self$Microsoft.IT.SCOM.SBWS.Subscription" Hosted="true" Singleton="false" />
+            </ClassTypes>
+          </EntityTypes>
+        </TypeDefinitions>
+        <Monitoring>
+          <Discoveries>
+            <Discovery ID="Microsoft.IT.SCOM.SBWS.InitialDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring" Target="$Reference/SC$Microsoft.SystemCenter.RootManagementServer" ConfirmDelivery="false" Remotable="false" Priority="Normal">
+              <Category>Discovery</Category>
+              <DiscoveryTypes>
+                <DiscoveryClass TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace" />
+                <DiscoveryClass TypeID="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$" />
+                <DiscoveryRelationship TypeID="$Reference/SC$Microsoft.SystemCenter.HealthServiceShouldManageEntity" />
+              </DiscoveryTypes>
+              <DataSource ID="DS" TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.InitialDiscovery.DS">
+                <IntervalSeconds>3600</IntervalSeconds>
+                <ClassId>$MPElement[Name="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$"]$</ClassId>
+                <ClassInstanceSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Name>
+                      <Value>$TemplateConfig/SBWSNamespaceName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/HostName$</Name>
+                      <Value>$TemplateConfig/SBWSHostName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/System$System.Entity"]/DisplayName$</Name>
+                      <Value>$TemplateConfig/SBWSNamespaceName$</Value>
+                    </Setting>
+                  </Settings>
+                </ClassInstanceSettings>
+                <RelationshipId>$MPElement[Name="$Reference/SC$Microsoft.SystemCenter.HealthServiceShouldManageEntity"]$</RelationshipId>
+                <SourceTypeId>$MPElement[Name="$Reference/SC$Microsoft.SystemCenter.HealthService"]$</SourceTypeId>
+                <SourceRoleSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Windows$Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                      <Value>$TemplateConfig/SBWSHostName$</Value>
+                    </Setting>
+                  </Settings>
+                </SourceRoleSettings>
+                <TargetTypeId>$MPElement[Name="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$"]$</TargetTypeId>
+                <TargetRoleSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Name>
+                      <Value>$TemplateConfig/SBWSNamespaceName$</Value>
+                    </Setting>
+                  </Settings>
+                </TargetRoleSettings>
+              </DataSource>
+            </Discovery>
+            <Discovery ID="Microsoft.IT.SCOM.SBWS.QueueDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring" Target="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+              <Category>Discovery</Category>
+              <DiscoveryTypes>
+                <DiscoveryClass TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Queue" />
+                <DiscoveryClass TypeID="Microsoft.IT.SCOM.SBWS.Queue.$TemplateConfig/TemplateIdString$" />
+                <DiscoveryRelationship TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace.Hosts.Queue" />
+              </DiscoveryTypes>
+              <DataSource ID="DS" TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.QueueDiscovery.DS">
+                <IntervalSeconds>3600</IntervalSeconds>
+                <TimeoutSeconds>120</TimeoutSeconds>
+                <SyncTime />
+                <ClassId>$MPElement[Name="Microsoft.IT.SCOM.SBWS.Queue.$TemplateConfig/TemplateIdString$"]$</ClassId>
+                <InstanceSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Name>
+                      <Value>$Target/Property[Type="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/System$System.Entity"]/DisplayName$</Name>
+                      <Value>$Data/Property[@Name='QueueName']$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Queue"]/QueueName$</Name>
+                      <Value>$Data/Property[@Name='QueueName']$</Value>
+                    </Setting>
+                  </Settings>
+                </InstanceSettings>
+              </DataSource>
+            </Discovery>
+            <Discovery ID="Microsoft.IT.SCOM.SBWS.TopicDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring" Target="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+              <Category>Discovery</Category>
+              <DiscoveryTypes>
+                <DiscoveryClass TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Topic" />
+                <DiscoveryClass TypeID="Microsoft.IT.SCOM.SBWS.Topic.$TemplateConfig/TemplateIdString$" />
+                <DiscoveryRelationship TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace.Hosts.Topic" />
+              </DiscoveryTypes>
+              <DataSource ID="DS" TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.TopicDiscovery.DS">
+                <IntervalSeconds>3600</IntervalSeconds>
+                <TimeoutSeconds>120</TimeoutSeconds>
+                <SyncTime />
+                <ClassId>$MPElement[Name="Microsoft.IT.SCOM.SBWS.Topic.$TemplateConfig/TemplateIdString$"]$</ClassId>
+                <InstanceSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Name>
+                      <Value>$Target/Property[Type="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/System$System.Entity"]/DisplayName$</Name>
+                      <Value>$Data/Property[@Name='TopicName']$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Topic"]/TopicName$</Name>
+                      <Value>$Data/Property[@Name='TopicName']$</Value>
+                    </Setting>
+                  </Settings>
+                </InstanceSettings>
+              </DataSource>
+            </Discovery>
+            <Discovery ID="Microsoft.IT.SCOM.SBWS.SubscriptionDiscovery.$TemplateConfig/TemplateIdString$" Enabled="onEssentialMonitoring" Target="Microsoft.IT.SCOM.SBWS.Topic.$TemplateConfig/TemplateIdString$" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+              <Category>Discovery</Category>
+              <DiscoveryTypes>
+                <DiscoveryClass TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Subscription" />
+                <DiscoveryClass TypeID="Microsoft.IT.SCOM.SBWS.Subscription.$TemplateConfig/TemplateIdString$" />
+                <DiscoveryRelationship TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.Topic.Hosts.Subscription" />
+              </DiscoveryTypes>
+              <DataSource ID="DS" TypeID="$Reference/Self$Microsoft.IT.SCOM.SBWS.SubscriptionDiscovery.DS">
+                <IntervalSeconds>3600</IntervalSeconds>
+                <TimeoutSeconds>120</TimeoutSeconds>
+                <SyncTime />
+                <ClassId>$MPElement[Name="Microsoft.IT.SCOM.SBWS.Subscription.$TemplateConfig/TemplateIdString$"]$</ClassId>
+                <InstanceSettings>
+                  <Settings>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Name>
+                      <Value>$Target/Host/Property[Type="$Reference/Self$Microsoft.IT.SCOM.SBWS.Namespace"]/NamespaceName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Topic"]/TopicName$</Name>
+                      <Value>$Target/Property[Type="$Reference/Self$Microsoft.IT.SCOM.SBWS.Topic"]/TopicName$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/System$System.Entity"]/DisplayName$</Name>
+                      <Value>$Data/Property[@Name='SubscriptionName']$</Value>
+                    </Setting>
+                    <Setting>
+                      <Name>$MPElement[Name="$Reference/Self$Microsoft.IT.SCOM.SBWS.Subscription"]/SubscriptionName$</Name>
+                      <Value>$Data/Property[@Name='SubscriptionName']$</Value>
+                    </Setting>
+                  </Settings>
+                </InstanceSettings>
+              </DataSource>
+            </Discovery>
+          </Discoveries>
+          <Overrides>
+            <SecureReferenceOverride ID="Microsoft.IT.SCOM.SBWS.RunAsProfile.Account.$TemplateConfig/TemplateIdString$.Override" Context="Microsoft.IT.SCOM.SBWS.Namespace.$TemplateConfig/TemplateIdString$" Enforced="false" SecureReference="$Reference/Self$Microsoft.IT.SCOM.SBWS.RunAsProfile.Account">
+              <Value>$TemplateConfig/RunAsAccount$</Value>
+            </SecureReferenceOverride>
+          </Overrides>
+        </Monitoring>
+      </Implementation>
+    </Template>
+  </Templates>
+</ManagementPackFragment>
